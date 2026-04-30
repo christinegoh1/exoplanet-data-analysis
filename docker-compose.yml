@@ -1,0 +1,33 @@
+services:
+    redis-db:
+        image: redis:7
+        ports:
+            - 6379:6379
+        volumes:
+            - ./data:/data
+        command: ["--save", "1", "1"]
+    api:
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        depends_on:
+            - redis-db
+        image: christinegoh/exoplanet-fastapi-api
+        environment:
+            REDIS_IP: redis-db
+        container_name: api
+        working_dir: /app/src
+        ports:
+            - "8000:8000"
+    worker:
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        image: christinegoh/exoplanet-fastapi-worker
+        container_name: worker
+        depends_on:
+            - redis-db
+        environment:
+            REDIS_IP: redis-db
+        command: ["uv", "run", "--", "python", "worker.py"]
+        working_dir: /app/src
