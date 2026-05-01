@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exoplanet-test-redis
+  labels:
+    app: exoplanet-test-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exoplanet-test-redis
+  template:
+    metadata:
+      labels:
+        app: exoplanet-test-redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7
+          command: ["redis-server"]
+          args: ["--save", "1", "1"]
+          ports:
+            - name: redis
+              containerPort: 6379
+          volumeMounts:
+            - name: exoplanet-test-redis-data
+              mountPath: "/data"
+      volumes:
+        - name: exoplanet-test-redis-data
+          persistentVolumeClaim:
+            claimName: exoplanet-test-redis-data

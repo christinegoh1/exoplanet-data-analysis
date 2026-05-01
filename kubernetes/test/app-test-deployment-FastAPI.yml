@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exoplanet-test-fastapi
+  labels:
+    app: exoplanet-test-fastapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exoplanet-test-fastapi
+  template:
+    metadata:
+      labels:
+        app: exoplanet-test-fastapi
+    spec:
+      containers:
+        - name: fastapi
+          imagePullPolicy: Always
+          image: christinegoh/exoplanet-fastapi-api:latest
+          env:
+            - name: REDIS_IP
+              value: exoplanet-test-redis-service
+          ports:
+            - name: http
+              containerPort: 8000

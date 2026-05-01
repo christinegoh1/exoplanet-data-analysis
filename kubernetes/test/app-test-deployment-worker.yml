@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exoplanet-test-worker
+  labels:
+    app: exoplanet-test-worker
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: exoplanet-test-worker
+  template:
+    metadata:
+      labels:
+        app: exoplanet-test-worker
+    spec:
+      containers:
+        - name: worker
+          imagePullPolicy: Always
+          image: christinegoh/exoplanet-fastapi-worker:latest
+          command: ["uv", "run", "--", "python", "worker.py"]
+          env:
+            - name: REDIS_IP
+              value: exoplanet-test-redis-service

@@ -1,0 +1,17 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: exoplanet-test-fastapi-ingress
+spec:
+  rules:
+    - host: exoplanet-christinegoh.coe332.tacc.cloud
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: exoplanet-test-fastapi-service
+                port:
+                  number: 8000
