@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: exoplanet-test-redis
+  name: exoplanet-prod-redis
   labels:
-    app: exoplanet-test-redis
+    app: exoplanet-prod-redis
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: exoplanet-test-redis
+      app: exoplanet-prod-redis
   template:
     metadata:
       labels:
-        app: exoplanet-test-redis
+        app: exoplanet-prod-redis
     spec:
       containers:
         - name: redis

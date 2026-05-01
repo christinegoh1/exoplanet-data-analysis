@@ -3,9 +3,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: exoplanet-test-fastapi-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
 spec:
+  ingressClassName: nginx
   rules:
-    - host: exoplanet-christinegoh.coe332.tacc.cloud
+    - host: christinegoh.coe332.tacc.cloud
       http:
         paths:
           - path: /

@@ -101,7 +101,7 @@ The application can be accessed through the NodePort service:
 
 The application can also be accessed through the Ingress URL:
 
-`http://christinegoh.coe332.tacc.cloud`
+`http://exoplanet-christinegoh.coe332.tacc.cloud`
 
 ## Output
 We will use `curl` to interact with the FastAPI microservice. Below are the following routes.
