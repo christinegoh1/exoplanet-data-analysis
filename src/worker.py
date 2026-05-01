@@ -137,7 +137,7 @@ def plot_mass_distribution(planets: list[dict]) -> bytes:
     masses = []
 
     for planet in planets:
-        mass = planet.get("pl_bmasse")
+        mass = planet.get("planet_mass")
         if mass is not None and mass < 5000:
             masses.append(mass)
 
@@ -164,8 +164,8 @@ def plot_radius_vs_distance(planets: list[dict]) -> bytes:
     distances = []
 
     for planet in planets:
-        radius = planet.get("pl_rade")
-        distance = planet.get("sy_dist")
+        radius = planet.get("planet_rad")
+        distance = planet.get("distance")
 
         if radius is not None and distance is not None:
             if radius < 50 and distance < 10000:

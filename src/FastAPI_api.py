@@ -85,16 +85,16 @@ def load_data() -> str:
     rd = get_redis_client()
 
     query = """
-    select pl_name as planet_name,
-           hostname,
-           sy_snum as num_stars,
-           sy_pnum as num_planets,
-           disc_year,
-           pl_orbper as orbital_period,
-           pl_rade as planet_rad,
-           pl_bmasse as planet_mass,
-           pl_orbeccen as orb_eccentricity,
-           sy_dist as distance
+    select pl_name,
+        hostname,
+        sy_snum,
+        sy_pnum,
+        disc_year,
+        pl_orbper,
+        pl_rade,
+        pl_bmasse,
+        pl_orbeccen,
+        sy_dist
     from pscomppars
     """
 
@@ -110,20 +110,19 @@ def load_data() -> str:
 
     for planet in data:
         planet_model = Exoplanet(
-            planet_name=planet["planet_name"],
+            planet_name=planet["pl_name"],
             hostname=planet.get("hostname"),
-            num_stars=parse_int(planet.get("num_stars")),
-            num_planets=parse_int(planet.get("num_planets")),
+            num_stars=parse_int(planet.get("sy_snum")),
+            num_planets=parse_int(planet.get("sy_pnum")),
             disc_year=parse_int(planet.get("disc_year")),
-            orbital_period=parse_float(planet.get("orbital_period")),
-            planet_rad=parse_float(planet.get("planet_rad")),
-            planet_mass=parse_float(planet.get("planet_mass")),
-            orb_eccentricity=parse_float(planet.get("orb_eccentricity")),
-            distance=parse_float(planet.get("distance"))
+            orbital_period=parse_float(planet.get("pl_orbper")),
+            planet_rad=parse_float(planet.get("pl_rade")),
+            planet_mass=parse_float(planet.get("pl_bmasse")),
+            orb_eccentricity=parse_float(planet.get("pl_orbeccen")),
+            distance=parse_float(planet.get("sy_dist"))
         )
 
         rd.set(planet_model.planet_name, planet_model.model_dump_json())
-
     logger.info("Loaded NASA exoplanet data into Redis successfully")
     return "Loaded NASA exoplanet data into Redis successfully"
 
