@@ -74,7 +74,6 @@ def get_selected_planets(start: int | None = None, end: int | None = None) -> li
 
     return selected_planets
 
-
 def figure_to_bytes(fig) -> bytes:
     """
     Convert matplotlib figure to PNG bytes
@@ -91,7 +90,6 @@ def figure_to_bytes(fig) -> bytes:
     image_bytes = buffer.read()
     plt.close(fig)
     return image_bytes
-
 
 def plot_discoveries_per_year(planets: list[dict]) -> bytes:
     """
@@ -123,7 +121,6 @@ def plot_discoveries_per_year(planets: list[dict]) -> bytes:
 
     return figure_to_bytes(fig)
 
-
 def plot_mass_distribution(planets: list[dict]) -> bytes:
     """
     Plot planet mass distribution
@@ -148,7 +145,6 @@ def plot_mass_distribution(planets: list[dict]) -> bytes:
     ax.set_title("Planet Mass Distribution")
 
     return figure_to_bytes(fig)
-
 
 def plot_radius_vs_distance(planets: list[dict]) -> bytes:
     """
@@ -180,7 +176,6 @@ def plot_radius_vs_distance(planets: list[dict]) -> bytes:
 
     return figure_to_bytes(fig)
 
-
 def analyze_planets(plot_type: str, start: int | None = None, end: int | None = None) -> bytes:
     """
     Analyze NASA exoplanet data and generate a plot
@@ -205,7 +200,6 @@ def analyze_planets(plot_type: str, start: int | None = None, end: int | None = 
         return plot_radius_vs_distance(planets)
 
     raise ValueError("Unsupported plot type")
-
 
 if __name__ == "__main__":
     do_work()

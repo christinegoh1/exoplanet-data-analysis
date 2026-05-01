@@ -113,7 +113,6 @@ def save_result(jid: str, image_bytes: bytes) -> bool:
     logger.info("Saved result for job %s", jid)
     return True
 
-
 def get_result(jid: str) -> bytes:
     """
     Return result object given jid
